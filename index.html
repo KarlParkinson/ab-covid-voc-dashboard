@@ -21,16 +21,8 @@
 
       const dataEndpoint = "https://d3eu7xn6iz7q5z.cloudfront.net"
 
-      vocReq = fetch(dataEndpoint + "/voc.json", {
-        header: {
-          'Access-Control-Allow-Origin':'*'
-        }
-      });
-      dailyReq = fetch(dataEndpoint + "/daily_cases.json", {
-        header: {
-          "Origin": "example.com"
-        }
-      });
+      vocReq = fetch(dataEndpoint + "/voc.json");
+      dailyReq = fetch(dataEndpoint + "/daily_cases.json");
       Promise.all([vocReq, dailyReq]).then(function(values) {
         vocResponse = values[0]
         dailyResponse = values[1]
