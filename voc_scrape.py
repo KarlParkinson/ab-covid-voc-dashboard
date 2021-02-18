@@ -3,6 +3,7 @@ import json
 import urllib.request
 import boto3
 import os
+import time
 from datetime import datetime, timedelta, timezone
 from bs4 import BeautifulSoup
 
@@ -14,7 +15,7 @@ def get_raw_cases_data():
     soup = BeautifulSoup(contents)
 
     total_cases = soup.select("#total-cases")
-    cases_JSON = total_cases[0].find_all("div", class_="figure")[2].find("script").contents[0]#labTesting[0].find_all("div", class_="figure").pop().find("script").contents[0]
+    cases_JSON = total_cases[0].find_all("div", class_="figure")[2].find("script").contents[0]
 
     cases_JSON = json.loads(cases_JSON)
     dates = cases_JSON["x"]["data"][0]["x"]
@@ -163,6 +164,11 @@ def caclculate_weekly_voc_cases(b117_dict_daily, b1351_dict_daily, p1_dict_daily
 
     return b117_weekly, b1351_weekly, p1_weekly, all_weekly
 
+def invalidate_cache(aws_access_key_id, aws_secret_access_key, distribution_id):
+    cloudfront = boto3.client("cloudfront", region_name="us-east-1", aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
+    response = cloudfront.create_invalidation(DistributionId=distribution_id, InvalidationBatch={"Paths": {"Quantity": 2, "Items": ["/voc.json", "/daily_cases.json"]}, "CallerReference": str(time.time())})
+    print(response)
+
 def lambda_handler(event, context):
     all_daily_cases = scrape_daily_all_cases()
     most_recent_reporting_date = list(all_daily_cases.keys()).pop()
@@ -216,6 +222,8 @@ def lambda_handler(event, context):
 
     s3.Object("covid-ab-data", "voc.json").put(Body=json.dumps(variants_dict, indent=2))
     s3.Object("covid-ab-data", "daily_cases.json").put(Body=json.dumps(all_cases_dict, indent=2))
+
+    invalidate_cache(aws_access_key_id, aws_secret_access_key, os.environ["CLOUDFRONT_DISTRIBUTION_ID"])
 
     return {
         "statusCode": 200
