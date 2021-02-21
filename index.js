@@ -195,6 +195,14 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
         labels: dates,
         datasets: [
           {
+            label: "7 Day Average",
+            data: rolling_daily_average,
+            backgroundColor: "#192430",
+            borderColor: "#192430",
+            type: "line",
+            fill: false
+          },
+          {
             label: "B117",
             data: b117_daily_cases,
             backgroundColor: "#FF0000",
@@ -212,15 +220,6 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
             backgroundColor: "#008000",
             borderColor: "#008000",
           },
-          {
-            label: "7 Day Average",
-            data: rolling_daily_average,
-            backgroundColor: "#192430",
-            borderColor: "#192430",
-            type: "line",
-            fill: false
-          }
-
         ]
       },
       options: barChartDailyOptions
