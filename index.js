@@ -1,5 +1,5 @@
 var lineChartCumulativeCtx = document.getElementById("cumulative-line-chart");
-var barChartDailyCtx = document.getElementById("daily-bar-chart");
+var dailyChartCtx = document.getElementById("daily-chart");
 var barChartProportionCtx = document.getElementById("proportion-bar-chart");
 var lastUpdatedField = document.getElementById("last-updated")
 
@@ -152,6 +152,7 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
     b117_daily_cases = Object.values(vocJson["B117"]["Daily"])
     b1351_daily_cases = Object.values(vocJson["B1351"]["Daily"])
     p1_daily_cases = Object.values(vocJson["P1"]["Daily"])
+    rolling_daily_average = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0].concat(Object.values(vocJson["All VOC"]["7 Day Daily Average"]))
 
     weeks = Object.keys(vocJson["All VOC"]["Weekly"])
     weeklyVOC = Object.values(vocJson["All VOC"]["Weekly"])
@@ -188,7 +189,7 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
       options: lineChartCumulativeOptions
     })
 
-    var myBarChart = new Chart(barChartDailyCtx, {
+    var dailyChart = new Chart(dailyChartCtx, {
       type: "bar",
       data: {
         labels: dates,
@@ -210,7 +211,16 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
             data: p1_daily_cases,
             backgroundColor: "#008000",
             borderColor: "#008000",
+          },
+          {
+            label: "7 Day Average",
+            data: rolling_daily_average,
+            backgroundColor: "#192430",
+            borderColor: "#192430",
+            type: "line",
+            fill: false
           }
+
         ]
       },
       options: barChartDailyOptions

@@ -164,6 +164,26 @@ def caclculate_weekly_voc_cases(b117_dict_daily, b1351_dict_daily, p1_dict_daily
 
     return b117_weekly, b1351_weekly, p1_weekly, all_weekly
 
+def calculate_rolling_7_day_daily_voc_average(voc_dict):
+    window_size = 7
+    averages = {}
+    series = list(voc_dict.values())
+    first_date = list(voc_dict.keys())[0]
+    average_date = datetime.strptime(first_date, "%Y-%m-%d") + timedelta(days=7)
+
+    i = 0
+    while i < len(series) - window_size + 1:
+        this_window = series[i : i + window_size]
+        window_average = sum(this_window) / window_size
+
+        averages[average_date.strftime("%Y-%m-%d")] = round(window_average, 2)
+        average_date += timedelta(days=1)
+        i += 1
+
+    return averages
+
+
+
 def invalidate_cache(aws_access_key_id, aws_secret_access_key, distribution_id):
     cloudfront = boto3.client("cloudfront", region_name="us-east-1", aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
     response = cloudfront.create_invalidation(DistributionId=distribution_id, InvalidationBatch={"Paths": {"Quantity": 2, "Items": ["/voc.json", "/daily_cases.json"]}, "CallerReference": str(time.time())})
@@ -207,12 +227,13 @@ def lambda_handler(event, context):
     b117_dict_cum, b1351_dict_cum, p1_dict_cum, all_cum = fill_in_missing_dates(b117_dict, b1351_dict, p1_dict, datetime(2020, 12, 15), datetime.strptime(most_recent_reporting_date, "%Y-%m-%d"))
     b117_dict_daily, b1351_dict_daily, p1_dict_daily, all_daily = caclculate_daily_voc_cases(b117_dict_cum, b1351_dict_cum, p1_dict_cum, datetime(2020, 12, 15), datetime.strptime(most_recent_reporting_date, "%Y-%m-%d"))
     b117_weekly, b1351_weekly, p1_weekly, all_weekly = caclculate_weekly_voc_cases(b117_dict_daily, b1351_dict_daily, p1_dict_daily, datetime(2021, 1, 25), datetime.strptime(most_recent_reporting_date, "%Y-%m-%d"))
+    rolling_averages = calculate_rolling_7_day_daily_voc_average(all_daily)
 
     variants_dict = {}
     variants_dict["B117"] = {"Cumulative": b117_dict_cum, "Daily": b117_dict_daily, "Weekly": b117_weekly}
     variants_dict["B1351"] = {"Cumulative": b1351_dict_cum, "Daily": b1351_dict_daily, "Weekly": b1351_weekly}
     variants_dict["P1"] = {"Cumulative": p1_dict_cum, "Daily": p1_dict_daily, "Weekly": p1_weekly}
-    variants_dict["All VOC"] = {"Cumulative": all_cum, "Daily": all_daily, "Weekly": all_weekly}
+    variants_dict["All VOC"] = {"Cumulative": all_cum, "Daily": all_daily, "7 Day Daily Average": rolling_averages, "Weekly": all_weekly}
 
     all_cases_dict = {"Daily": all_daily_cases, "Weekly": all_weekly_cases}
 
