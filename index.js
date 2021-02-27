@@ -205,7 +205,7 @@ const estimatedWeeklyPositivityChartOptions = {
   },
   title: {
     display: true,
-    text: "AB Estimated VOC By Week Starting Jan 25th Assuming 300 Samples Sequenced Per Day"
+    text: "AB Estimated VOC Positivity By Week Starting Jan 25th Assuming 300 Samples Sequenced Per Day"
   },
   layout: {
     padding: {
