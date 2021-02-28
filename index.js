@@ -264,7 +264,6 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
       return item - weeklyVOC[index]
     })
 
-    debugger
     var samplesCurrentWeek = 300 * dayOfWeek()
     if (lastDate !== new Date().toLocaleString("en-CA", {timeZone: "America/Denver"}).split(",")[0]) {
       // Subtract 300 samples unless data for today has been updated
