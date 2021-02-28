@@ -89,7 +89,11 @@ const barChartDailyOptions = {
       top: 50,
       bottom: 0
     }
-  }
+  },
+  tooltips: {
+    mode: 'index',
+    intersect: false,
+  },
 }
 
 const barChartionProportionOptions = {
@@ -190,7 +194,11 @@ const weeklyLogScaleProportionOptions = {
       top: 50,
       bottom: 0
     }
-  }
+  },
+  tooltips: {
+    mode: 'index',
+    intersect: false,
+  },
 }
 
 const estimatedWeeklyPositivityChartOptions = {
@@ -225,7 +233,11 @@ const estimatedWeeklyPositivityChartOptions = {
       top: 50,
       bottom: 0
     }
-  }
+  },
+  tooltips: {
+    mode: 'index',
+    intersect: false,
+  },
 }
 
 var vocReq = fetch(dataEndpoint + "/voc.json");
