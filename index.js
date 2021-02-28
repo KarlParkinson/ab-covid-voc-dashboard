@@ -1,7 +1,7 @@
 function dayOfWeek() {
   var mondayOfWeek = getMonday(new Date());
   var today = new Date();
-  return (today.getDay() - mondayOfWeek.getDay()) + 1
+  return (today.getDate() - mondayOfWeek.getDate()) + 1
 }
 
 function getMonday(d) {
@@ -256,6 +256,7 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
       return item - weeklyVOC[index]
     })
 
+    debugger
     var samplesCurrentWeek = 300 * dayOfWeek()
     if (lastDate !== new Date().toLocaleString("en-CA", {timeZone: "America/Denver"}).split(",")[0]) {
       // Subtract 300 samples unless data for today has been updated
