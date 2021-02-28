@@ -48,8 +48,8 @@ const lineChartCumulativeOptions = {
   },
   layout: {
     padding: {
-      left: 50,
-      right: 50,
+      left: 25,
+      right: 25,
       top: 0,
       bottom: 0
     }
@@ -84,9 +84,9 @@ const barChartDailyOptions = {
   },
   layout: {
     padding: {
-      left: 50,
-      right: 50,
-      top: 50,
+      left: 25,
+      right: 25,
+      top: 0,
       bottom: 0
     }
   },
@@ -142,9 +142,9 @@ const barChartionProportionOptions = {
   },
   layout: {
     padding: {
-      left: 50,
-      right: 50,
-      top: 50,
+      left: 25,
+      right: 25,
+      top: 0,
       bottom: 0
     }
   }
@@ -189,9 +189,9 @@ const weeklyLogScaleProportionOptions = {
   },
   layout: {
     padding: {
-      left: 50,
-      right: 50,
-      top: 50,
+      left: 25,
+      right: 25,
+      top: 0,
       bottom: 0
     }
   },
@@ -228,9 +228,9 @@ const estimatedWeeklyPositivityChartOptions = {
   },
   layout: {
     padding: {
-      left: 50,
-      right: 50,
-      top: 50,
+      left: 25,
+      right: 25,
+      top: 0,
       bottom: 0
     }
   },
