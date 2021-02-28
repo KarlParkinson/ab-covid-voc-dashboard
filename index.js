@@ -53,7 +53,10 @@ const lineChartCumulativeOptions = {
       top: 0,
       bottom: 0
     }
-  }
+  },
+  tooltips: {
+    intersect: false,
+  },
 }
 
 const barChartDailyOptions = {
@@ -276,7 +279,7 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
       weeklyVariantPositivity.push(((weeklyVOC[i] / weeklySamples[i])*100).toFixed(2))
     }
 
-    var myLineChart = new Chart(lineChartCumulativeCtx, {
+    var cumulativeLineChart = new Chart(lineChartCumulativeCtx, {
       type: "line",
       data: {
         labels: dates,
