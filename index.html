@@ -2,48 +2,25 @@
 <html>
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-    <div class="container">
-      <header>
-        <h1>
-          Alberta COVID-19 Variant of Concern Dashboard
-        </h1>
-        <h2 id="last-updated"></h2>
-        <a id="voc-link">Variant Data</a>
-        <a id="daily-link">Daily Cases Data</a>
-      </header>
-      <div class="row">
-        <div class="col">
-          <canvas id="cumulative-line-chart"></canvas>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <canvas id="daily-chart"></canvas>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <canvas id="proportion-bar-chart"></canvas>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <canvas id="weekly-proportion-log-scale"></canvas>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <canvas id="estimated-weekly-variant-positivity"></canvas>
-        </div>
-      </div>
-      <script type="text/javascript" src="index.js"></script>
-      <footer>
-        By <a href="https://github.com/KarlParkinson">Karl Parkinson</a>. Code available at <a href="https://github.com/KarlParkinson/ab-covid-voc-dashboard">Github</a>. Pull requests welcome.
-      </footer>
-    </div>
+    <header>
+      <h1>
+        Alberta COVID-19 Variant of Concern Dashboard
+      </h1>
+      <h2 id="last-updated"></h2>
+      <a id="voc-link">Variant Data</a>
+      <a id="daily-link">Daily Cases Data</a>
+    </header>
+    <canvas id="cumulative-line-chart"></canvas>
+    <canvas id="daily-chart"></canvas>
+    <canvas id="proportion-bar-chart"></canvas>
+    <canvas id="weekly-proportion-log-scale"></canvas>
+    <canvas id="estimated-weekly-variant-positivity"></canvas>
+    <script type="text/javascript" src="index.js"></script>
+    <footer>
+      By <a href="https://github.com/KarlParkinson">Karl Parkinson</a>. Code available at <a href="https://github.com/KarlParkinson/ab-covid-voc-dashboard">Github</a>. Pull requests welcome.
+    </footer>
   </body>
 </html>
