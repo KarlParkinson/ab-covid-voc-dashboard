@@ -2,15 +2,17 @@
 <html>
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+    <link href="style.css" rel="stylesheet">
   </head>
   <body>
-    <h1>
-      Alberta COVID-19 Variant of Concern Dashboard
-    </h1>
-    <h2 id="last-updated">
-    </h2>
-    <a id="voc-link">Variant Data</a>
-    <a id="daily-link">Daily Cases Data</a>
+    <header>
+      <h1>
+        Alberta COVID-19 Variant of Concern Dashboard
+      </h1>
+      <h2 id="last-updated"></h2>
+      <a id="voc-link">Variant Data</a>
+      <a id="daily-link">Daily Cases Data</a>
+    </header>
     <canvas id="cumulative-line-chart"></canvas>
     <canvas id="daily-chart"></canvas>
     <canvas id="proportion-bar-chart"></canvas>

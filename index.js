@@ -180,6 +180,14 @@ const weeklyLogScaleProportionOptions = {
     display: true,
     text: "AB Cumulative Reported VOC, Cumulative Reported Non-VOC, Cumulative All By Week Starting Jan 25th Log Scale"
   },
+  layout: {
+    padding: {
+      left: 50,
+      right: 50,
+      top: 50,
+      bottom: 0
+    }
+  }
 }
 
 const estimatedWeeklyPositivityChartOptions = {
