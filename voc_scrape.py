@@ -183,7 +183,12 @@ def calculate_rolling_7_day_daily_voc_average(voc_dict):
 
     return averages
 
+def save_webpage(s3_client):
+    url = "https://www.alberta.ca/covid-19-alberta-data.aspx"
+    contents = requests.get("https://www.alberta.ca/covid-19-alberta-data.aspx")
+    date = datetime.now(timezone(-timedelta(hours=7)))
 
+    s3.Object("covid-ab-data", "alberta_covid_html/alberta-covid-" + date.strftime("%Y-%m-%d") + ".html").put(Body=contents.txt)
 
 def invalidate_cache(aws_access_key_id, aws_secret_access_key, distribution_id):
     cloudfront = boto3.client("cloudfront", region_name="us-east-1", aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
@@ -244,6 +249,8 @@ def lambda_handler(event, context):
 
     s3.Object("covid-ab-data", "voc.json").put(Body=json.dumps(variants_dict, indent=2))
     s3.Object("covid-ab-data", "daily_cases.json").put(Body=json.dumps(all_cases_dict, indent=2))
+
+    save_webpage(s3)
 
     invalidate_cache(aws_access_key_id, aws_secret_access_key, os.environ["CLOUDFRONT_DISTRIBUTION_ID"])
 
