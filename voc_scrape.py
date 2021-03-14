@@ -188,7 +188,7 @@ def save_webpage(s3_client):
     contents = requests.get("https://www.alberta.ca/covid-19-alberta-data.aspx")
     date = datetime.now(timezone(-timedelta(hours=7)))
 
-    s3.Object("covid-ab-data", "alberta_covid_html/alberta-covid-" + date.strftime("%Y-%m-%d") + ".html").put(Body=contents.txt)
+    s3_client.Object("covid-ab-data", "alberta_covid_html/alberta-covid-" + date.strftime("%Y-%m-%d") + ".html").put(Body=contents.text)
 
 def invalidate_cache(aws_access_key_id, aws_secret_access_key, distribution_id):
     cloudfront = boto3.client("cloudfront", region_name="us-east-1", aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
