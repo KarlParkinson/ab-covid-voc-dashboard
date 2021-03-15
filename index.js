@@ -15,7 +15,6 @@ var lineChartCumulativeCtx = document.getElementById("cumulative-line-chart");
 var dailyChartCtx = document.getElementById("daily-chart");
 var barChartProportionCtx = document.getElementById("proportion-bar-chart");
 var weeklyLogScaleCtx = document.getElementById("weekly-proportion-log-scale");
-var estimatedVariantPositivityCtx = document.getElementById("estimated-weekly-variant-positivity")
 var lastUpdatedField = document.getElementById("last-updated");
 
 const dataEndpoint = "https://d3eu7xn6iz7q5z.cloudfront.net";
@@ -186,45 +185,6 @@ const weeklyLogScaleProportionOptions = {
   title: {
     display: true,
     text: "AB Cumulative Reported VOC, Cumulative Reported Non-VOC, Cumulative All By Week Starting Jan 25th Log Scale"
-  },
-  layout: {
-    padding: {
-      left: 25,
-      right: 25,
-      top: 0,
-      bottom: 0
-    }
-  },
-  tooltips: {
-    mode: 'index',
-    intersect: false,
-  },
-}
-
-const estimatedWeeklyPositivityChartOptions = {
-  responsive: true,
-  maintainAspectRatio: true,
-  scales: {
-    xAxes: [{
-      scaleLabel: {
-        display: true,
-        labelString: "Week"
-      }
-    }],
-    yAxes: [{
-      stacked: true,
-      scaleLabel: {
-        display: true,
-        labelString: "VOC Positivity %"
-      },
-      ticks: {
-        max: 100
-      }
-    }]
-  },
-  title: {
-    display: true,
-    text: "AB Estimated VOC Positivity By Week Starting Jan 25th Assuming 300 Samples Sequenced Per Day"
   },
   layout: {
     padding: {
@@ -412,24 +372,6 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
         ]
       },
       options: weeklyLogScaleProportionOptions
-    })
-
-    var estimatedVariantPositivityChart = new Chart(estimatedVariantPositivityCtx, {
-      type: "line",
-      data: {
-        labels: weeks,
-        datasets: [
-          {
-            label: "VOC Positivity",
-            data: weeklyVariantPositivity,
-            backgroundColor: "#FF0000",
-            borderColor: "#FF0000",
-            fill: false,
-            lineTension: 0
-          }
-        ]
-      },
-      options: estimatedWeeklyPositivityChartOptions
     })
   });
 });
