@@ -229,6 +229,11 @@ def lambda_handler(event, context):
         if (row["AB_P1"] != " " and row["AB_P1"] != ""):
             p1_dict[date.strftime("%Y-%m-%d")] = float(row["AB_P1"])
 
+    b117_dict["2021-04-02"] = 300
+    b117_dict["2021-04-03"] = 550
+    b117_dict["2021-04-04"] = 600
+    b117_dict["2021-04-05"] = 474
+
 
     b117_dict_cum, b1351_dict_cum, p1_dict_cum, all_cum = fill_in_missing_dates(b117_dict, b1351_dict, p1_dict, datetime(2020, 12, 15), datetime.strptime(most_recent_reporting_date, "%Y-%m-%d"))
     b117_dict_daily, b1351_dict_daily, p1_dict_daily, all_daily = caclculate_daily_voc_cases(b117_dict_cum, b1351_dict_cum, p1_dict_cum, datetime(2020, 12, 15), datetime.strptime(most_recent_reporting_date, "%Y-%m-%d"))
