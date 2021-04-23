@@ -221,7 +221,7 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
 
     dates = Object.keys(vocJson["B117"]["Cumulative"])
     lastDate = dates[dates.length - 1]
-    lastUpdatedField.innerText = "Last Updated " + lastDate + ". Updates around 6:00PM MST."
+    lastUpdatedField.innerText = "Last Updated " + lastDate + ". Updates around 6:00PM MDT."
 
     b117_cumulative_cases = Object.values(vocJson["B117"]["Cumulative"])
     b1351_cumulative_cases = Object.values(vocJson["B1351"]["Cumulative"])
