@@ -15,6 +15,7 @@ var lineChartCumulativeCtx = document.getElementById("cumulative-line-chart");
 var dailyChartCtx = document.getElementById("daily-chart");
 var barChartProportionCtx = document.getElementById("proportion-bar-chart");
 var weeklyLogScaleCtx = document.getElementById("weekly-proportion-log-scale");
+var weeklyFrequencyCtx = document.getElementById("weekly-frequency-voc-chart")
 var lastUpdatedField = document.getElementById("last-updated");
 
 const dataEndpoint = "https://d3eu7xn6iz7q5z.cloudfront.net";
@@ -200,6 +201,42 @@ const weeklyLogScaleProportionOptions = {
   },
 }
 
+const weeklyFrequencyBarChartOptions = {
+  responsive: true,
+  maintainAspectRatio: true,
+  scales: {
+    xAxes: [{
+      stacked: true,
+      scaleLabel: {
+        display: true,
+        labelString: "Week"
+      }
+    }],
+    yAxes: [{
+      stacked: true,
+      scaleLabel: {
+        display: true,
+        labelString: "Variant Frequency"
+      },
+      ticks: {
+        max: 100
+      },
+    }]
+  },
+  title: {
+    display: true,
+    text: "AB Frequency of Each VOC By Week Starting Jan 25th"
+  },
+  layout: {
+    padding: {
+      left: 25,
+      right: 25,
+      top: 0,
+      bottom: 0
+    }
+  }
+}
+
 var vocReq = fetch(dataEndpoint + "/voc.json");
 var dailyReq = fetch(dataEndpoint + "/daily_cases.json");
 Promise.all([vocReq, dailyReq]).then(function(values) {
@@ -237,6 +274,16 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
     weeklyAll = Object.values(dailyJson["Weekly"])
     weeklyNonVOC = weeklyAll.map((item, index) => {
       return item - weeklyVOC[index]
+    })
+
+    b117_weekly_percentages = []
+    b1351_weekly_percentages = []
+    p1_weekly_percentages = []
+
+    weeks.forEach((week) => {
+      b117_weekly_percentages.push(((vocJson["B117"]["Weekly"][week] / vocJson["All VOC"]["Weekly"][week])*100).toFixed(2))
+      b1351_weekly_percentages.push(((vocJson["B1351"]["Weekly"][week] / vocJson["All VOC"]["Weekly"][week])*100).toFixed(2))
+      p1_weekly_percentages.push(((vocJson["P1"]["Weekly"][week] / vocJson["All VOC"]["Weekly"][week])*100).toFixed(2))
     })
 
     var samplesCurrentWeek = 300 * dayOfWeek()
@@ -372,6 +419,34 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
         ]
       },
       options: weeklyLogScaleProportionOptions
+    })
+
+    var weeklyVariantFrequencyChart = new Chart(weeklyFrequencyCtx, {
+      type: "bar",
+      data: {
+        labels: weeks,
+        datasets: [
+          {
+            label: "B117%",
+            data: b117_weekly_percentages,
+            backgroundColor: "#FF0000",
+            borderColor: "#FF0000",
+          },
+          {
+            label: "B1351%",
+            data: b1351_weekly_percentages,
+            backgroundColor: "#0000FF",
+            borderColor: "#0000FF",
+          },
+          {
+            label: "P1%",
+            data: p1_weekly_percentages,
+            backgroundColor: "#008000",
+            borderColor: "#008000",
+          },
+        ]
+      },
+      options: weeklyFrequencyBarChartOptions
     })
   });
 });
