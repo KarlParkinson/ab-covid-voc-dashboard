@@ -287,7 +287,7 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
       b117_weekly_percentages.push(((vocJson["B117"]["Weekly"][week] / vocJson["All VOC"]["Weekly"][week])*100).toFixed(2))
       b1351_weekly_percentages.push(((vocJson["B1351"]["Weekly"][week] / vocJson["All VOC"]["Weekly"][week])*100).toFixed(2))
       p1_weekly_percentages.push(((vocJson["P1"]["Weekly"][week] / vocJson["All VOC"]["Weekly"][week])*100).toFixed(2))
-      p1_weekly_percentages.push(((vocJson["B1617"]["Weekly"][week] / vocJson["All VOC"]["Weekly"][week])*100).toFixed(2))
+      b1617_weekly_percentages.push(((vocJson["B1617"]["Weekly"][week] / vocJson["All VOC"]["Weekly"][week])*100).toFixed(2))
     })
 
     var samplesCurrentWeek = 300 * dayOfWeek()
@@ -331,8 +331,8 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
           {
             label: "B1617",
             data: b1617_cumulative_cases,
-            backgroundColor: "##ff80ed",
-            borderColor: "##ff80ed",
+            backgroundColor: "#ff80ed",
+            borderColor: "#ff80ed",
             fill: false
           }
         ]
