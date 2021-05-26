@@ -181,7 +181,7 @@ def caclculate_weekly_voc_cases(b117_dict_daily, b1351_dict_daily, p1_dict_daily
         b1617_weekly[str(week)] = b1617_weekly_sum
         all_weekly[str(week)] = b117_weekly_sum + b1351_weekly_sum + p1_weekly_sum + b1617_weekly_sum
 
-    return b117_weekly, b1351_weekly, p1_weekly, b1617_weekly_sum, all_weekly
+    return b117_weekly, b1351_weekly, p1_weekly, b1617_weekly, all_weekly
 
 def calculate_rolling_7_day_daily_voc_average(voc_dict):
     window_size = 7
