@@ -263,10 +263,12 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
     b117_cumulative_cases = Object.values(vocJson["B117"]["Cumulative"])
     b1351_cumulative_cases = Object.values(vocJson["B1351"]["Cumulative"])
     p1_cumulative_cases = Object.values(vocJson["P1"]["Cumulative"])
+    b1617_cumulative_cases = Object.values(vocJson["B1617"]["Cumulative"])
 
     b117_daily_cases = Object.values(vocJson["B117"]["Daily"])
     b1351_daily_cases = Object.values(vocJson["B1351"]["Daily"])
     p1_daily_cases = Object.values(vocJson["P1"]["Daily"])
+    b1617_daily_cases = Object.values(vocJson["B1617"]["Daily"])
     rolling_daily_average = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0].concat(Object.values(vocJson["All VOC"]["7 Day Daily Average"]))
 
     weeks = Object.keys(vocJson["All VOC"]["Weekly"])
@@ -279,11 +281,13 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
     b117_weekly_percentages = []
     b1351_weekly_percentages = []
     p1_weekly_percentages = []
+    b1617_weekly_percentages = []
 
     weeks.forEach((week) => {
       b117_weekly_percentages.push(((vocJson["B117"]["Weekly"][week] / vocJson["All VOC"]["Weekly"][week])*100).toFixed(2))
       b1351_weekly_percentages.push(((vocJson["B1351"]["Weekly"][week] / vocJson["All VOC"]["Weekly"][week])*100).toFixed(2))
       p1_weekly_percentages.push(((vocJson["P1"]["Weekly"][week] / vocJson["All VOC"]["Weekly"][week])*100).toFixed(2))
+      p1_weekly_percentages.push(((vocJson["B1617"]["Weekly"][week] / vocJson["All VOC"]["Weekly"][week])*100).toFixed(2))
     })
 
     var samplesCurrentWeek = 300 * dayOfWeek()
@@ -323,6 +327,13 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
             backgroundColor: "#008000",
             borderColor: "#008000",
             fill: false
+          },
+          {
+            label: "B1617",
+            data: b1617_cumulative_cases,
+            backgroundColor: "##ff80ed",
+            borderColor: "##ff80ed",
+            fill: false
           }
         ]
       },
@@ -359,6 +370,12 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
             data: p1_daily_cases,
             backgroundColor: "#008000",
             borderColor: "#008000",
+          },
+          {
+            label: "B1617",
+            data: b1617_daily_cases,
+            backgroundColor: "#ff80ed",
+            borderColor: "#ff80ed",
           },
         ]
       },
@@ -443,6 +460,12 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
             data: p1_weekly_percentages,
             backgroundColor: "#008000",
             borderColor: "#008000",
+          },
+          {
+            label: "P1%",
+            data: b1617_weekly_percentages,
+            backgroundColor: "#ff80ed",
+            borderColor: "#ff80ed",
           },
         ]
       },
