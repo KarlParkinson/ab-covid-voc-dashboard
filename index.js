@@ -462,7 +462,7 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
             borderColor: "#008000",
           },
           {
-            label: "P1%",
+            label: "B1617%",
             data: b1617_weekly_percentages,
             backgroundColor: "#ff80ed",
             borderColor: "#ff80ed",
