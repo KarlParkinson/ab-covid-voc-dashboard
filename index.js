@@ -308,28 +308,28 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
         labels: dates,
         datasets: [
           {
-            label: "B117",
+            label: "Alpha (B117)",
             data: b117_cumulative_cases,
             backgroundColor: "#FF0000",
             borderColor: "#FF0000",
             fill: false
           },
           {
-            label: "B1351",
+            label: "Beta (B1351)",
             data: b1351_cumulative_cases,
             backgroundColor: "#0000FF",
             borderColor: "#0000FF",
             fill: false
           },
           {
-            label: "P1",
+            label: "Gamma (P1)",
             data: p1_cumulative_cases,
             backgroundColor: "#008000",
             borderColor: "#008000",
             fill: false
           },
           {
-            label: "B1617",
+            label: "Delta (B1617)",
             data: b1617_cumulative_cases,
             backgroundColor: "#ff80ed",
             borderColor: "#ff80ed",
@@ -354,25 +354,25 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
             fill: false
           },
           {
-            label: "B117",
+            label: "Alpha (B117)",
             data: b117_daily_cases,
             backgroundColor: "#FF0000",
             borderColor: "#FF0000",
           },
           {
-            label: "B1351",
+            label: "Beta (B1351)",
             data: b1351_daily_cases,
             backgroundColor: "#0000FF",
             borderColor: "#0000FF",
           },
           {
-            label: "P1",
+            label: "Gamma (P1)",
             data: p1_daily_cases,
             backgroundColor: "#008000",
             borderColor: "#008000",
           },
           {
-            label: "B1617",
+            label: "Delta (B1617)",
             data: b1617_daily_cases,
             backgroundColor: "#ff80ed",
             borderColor: "#ff80ed",
@@ -444,25 +444,25 @@ Promise.all([vocReq, dailyReq]).then(function(values) {
         labels: weeks,
         datasets: [
           {
-            label: "B117%",
+            label: "Alpha (B117) %",
             data: b117_weekly_percentages,
             backgroundColor: "#FF0000",
             borderColor: "#FF0000",
           },
           {
-            label: "B1351%",
+            label: "Beta (B1351) %",
             data: b1351_weekly_percentages,
             backgroundColor: "#0000FF",
             borderColor: "#0000FF",
           },
           {
-            label: "P1%",
+            label: "Gamma (P1) %",
             data: p1_weekly_percentages,
             backgroundColor: "#008000",
             borderColor: "#008000",
           },
           {
-            label: "B1617%",
+            label: "Delta (B1617) %",
             data: b1617_weekly_percentages,
             backgroundColor: "#ff80ed",
             borderColor: "#ff80ed",
